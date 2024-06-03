@@ -20,7 +20,7 @@ function verificarlogin()
     }
 }
 
-if ($segments[0] === 'ecommerce') {
+if ($segments[0] === 'parcial') {
     switch ($segments[1] ?? '') {
         case 'login':
             require ROOT_VIEW . '/seguridad/login.php';

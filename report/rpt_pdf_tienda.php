@@ -1,6 +1,6 @@
 <?php
 
-require_once ($_SERVER['DOCUMENT_ROOT'] . "/ecommerce/config/global.php");
+require_once ($_SERVER['DOCUMENT_ROOT'] . "/parcial/config/global.php");
 require_once ( ROOT_DIR ."/model/Seg_tiendaModel.php");
 include (ROOT_CORE.'/fpdf/fpdf.php');
 
