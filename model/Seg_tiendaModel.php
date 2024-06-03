@@ -1,5 +1,6 @@
 <?php
-include_once "../core/Conectar.php";
+include_once "../core/ModeloBasePDO.php";
+
 class Seg_tiendaModel extends ModeloBasePDO{
     public function __construct(){
         parent::__construct();

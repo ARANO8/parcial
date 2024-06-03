@@ -6,7 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 session_start();
 
-require_once ($_SERVER['DOCUMENT_ROOT']."/config/global.php");
+require_once ($_SERVER['DOCUMENT_ROOT'].  "/ecommerce/config/global.php");
 require_once (ROOT_DIR."/model/Seg_tiendaModel.php");
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -20,28 +20,31 @@ catch (Exception $e) {
 }
 switch ($method) {
     case 'GET':
+        
         $p_ope = !empty($input['ope']) ? $input['ope'] : $_GET['ope'];
         if (!empty($p_ope)) {
-            if ($p_ope == 'filterall') {
+
+            if ($p_ope == 'filterId') {
+               filterId($input);
+            } elseif ($p_ope == 'filterSearch') {
+               filterPaginateAll($input);
+            } elseif ($p_ope ==  'filterall') {
                 filterAll($input);
-            }elseif ($p_ope == 'filterId') {
-                // filterId($input);
-            }elseif ($p_ope == 'filterSearch') {
-                // filterPaginateAll($input);
             }
         }
+
         break;
-    case 'POST':
-        // insert($input);
+    case 'POST': //inserta
+       insert($input);
         break;
-    case 'PUT':
-        // update($input);
+    case 'PUT': //actualiza
+        update($input);
         break;
-    case 'DELETE':
-        // delete($input);
+    case 'DELETE': //elimina
+        delete($input);
         break;
-    default:
-        echo 'NO SOPORTADO';
+    default: //metodo NO soportado
+        echo 'METODO NO SOPORTADO';
         break;
 }
 function filterAll($input){
@@ -49,41 +52,54 @@ function filterAll($input){
     $var = $objTienda->findall();
     echo json_encode($var);
 }
-// function filterId($input){
-//     $objCat = new Seg_tienda_ropaModel();
-//     $p_idcategoria=!empty($input['idcategoria']) ? $input['idcategoria'] : $_GET['idcategoria'];
-//     $var = $objCat->findid($p_idcategoria);
-//     echo json_encode($var);
-// }
-// function filterPaginateAll($input){
-//     $page = !empty($input['page']) ? $input['page'] : $_GET['page'];
-//     $filter = !empty($input['filter']) ? $input['filter'] : $_GET['filter'];
-//     $nro_record_page = 10;
-//     $p_limit = 10;
-//     $p_offset = 0;
-//     $p_offset = abs(($page-1)*$nro_record_page);
-//     $objCat = new Seg_tienda_ropaModel();
-//     $var = $objCat->findpaginateall($filter, $p_limit,$p_offset);
-//     echo json_encode($var);
-// }
-// function insert($input){
-//     $p_nombreC=!empty ($input['nombreC']) ? $input['nombreC'] : $_POST['nombreC'];
-//     $objCat = new Seg_tienda_ropaModel();
-//     $var = $objCat->insert($p_nombreC);
-//     echo json_encode($var);
-// }
-// function update($input){
-//     $p_idcategoria=!empty ($input['idcategoria']) ? $input['idcategoria'] : $_POST['idcategoria'];
-//     $p_nombreC=!empty ($input['nombreC']) ? $input['nombreC'] : $_POST['nombreC'];
-//     $objCat = new Seg_tienda_ropaModel();
-//     $var = $objCat->update($p_idcategoria,$p_nombreC);
-//     echo json_encode($var);
-// }
-// function delete($input){
-//     $p_idcategoria=!empty ($input['idcategoria']) ? $input['idcategoria'] : $_POST['idcategoria'];
-//     $objCat = new Seg_tienda_ropaModel();
-//     $var = $objCat->delete($p_idcategoria);
-//     echo json_encode($var); 
-// }
+function filterId($input){
+    $objCat = new Seg_tiendaModel();
+    $p_codigo_ropa=!empty($input['codigo_ropa']) ? $input['codigo_ropa'] : $_GET['codigo_ropa'];
+    $var = $objCat->findid($p_codigo_ropa);
+    echo json_encode($var);
+}
+function filterPaginateAll($input){
+    $page = !empty($input['page']) ? $input['page'] : $_GET['page'];
+    $filter = !empty($input['filter']) ? $input['filter'] : $_GET['filter'];
+    $nro_record_page = 10;
+    $p_limit = 10;
+    $p_offset = 0;
+    $p_offset = abs(($page-1)*$nro_record_page);
+    $objCat = new Seg_tiendaModel();
+    $var = $objCat->findpaginateall($filter, $p_limit,$p_offset);
+    echo json_encode($var);
+}
+function insert($input){
+    $p_codigo_ropa=!empty ($input['codigo_ropa']) ? $input['codigo_ropa'] : $_POST['codigo_ropa'];
+    $p_tipo=!empty ($input['tipo']) ? $input['tipo'] : $_POST['tipo'];
+    $p_talla=!empty ($input['talla']) ? $input['talla'] : $_POST['talla'];
+    $p_precio=!empty ($input['precio']) ? $input['precio'] : $_POST['precio'];
+    $p_stock=!empty ($input['stock']) ? $input['stock'] : $_POST['stock'];
+    $p_marca=!empty ($input['marca']) ? $input['marca'] : $_POST['marca'];
+    $p_proveedor=!empty ($input['proveedor']) ? $input['proveedor'] : $_POST['proveedor'];
+    $p_color=!empty ($input['color']) ? $input['color'] : $_POST['color'];
+    $objCat = new Seg_tiendaModel();
+    $var = $objCat->insert($p_codigo_ropa, $p_tipo, $p_talla, $p_precio, $p_stock, $p_marca, $p_proveedor, $p_color);
+    echo json_encode($var);
+}
+function update($input){
+    $p_codigo_ropa=!empty ($input['codigo_ropa']) ? $input['codigo_ropa'] : $_POST['codigo_ropa'];
+    $p_tipo=!empty ($input['tipo']) ? $input['tipo'] : $_POST['tipo'];
+    $p_talla=!empty ($input['talla']) ? $input['talla'] : $_POST['talla'];
+    $p_precio=!empty ($input['precio']) ? $input['precio'] : $_POST['precio'];
+    $p_stock=!empty ($input['stock']) ? $input['stock'] : $_POST['stock'];
+    $p_marca=!empty ($input['marca']) ? $input['marca'] : $_POST['marca'];
+    $p_proveedor=!empty ($input['proveedor']) ? $input['proveedor'] : $_POST['proveedor'];
+    $p_color=!empty ($input['color']) ? $input['color'] : $_POST['color'];
+    $objCat = new Seg_tiendaModel();
+    $var = $objCat->update($p_codigo_ropa, $p_tipo, $p_talla, $p_precio, $p_stock, $p_marca, $p_proveedor, $p_color);
+    echo json_encode($var);
+}
+function delete($input){
+    $p_codigo_ropa=!empty ($input['codigo_ropa']) ? $input['codigo_ropa'] : $_POST['codigo_ropa'];
+    $objCat = new Seg_tiendaModel();
+    $var = $objCat->delete($p_codigo_ropa);
+    echo json_encode($var); 
+}
 
 ?>
