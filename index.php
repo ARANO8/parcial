@@ -15,12 +15,12 @@ function error404()
 }
 function verificarlogin()
 {
-    if (!isset($_SESSION['login']['full_name'])) {
+    if (!isset($_SESSION['login']['fullname'])) {
         echo '<script>window.location.href="' . HTTP_BASE . '/login"</script>';
     }
 }
 
-if ($segments[0] === 'parcial') {
+if ($segments[0] === 'parcialfinal') {
     switch ($segments[1] ?? '') {
         case 'login':
             require ROOT_VIEW . '/seguridad/login.php';
@@ -48,34 +48,34 @@ if ($segments[0] === 'parcial') {
         case 'web':
             verificarlogin();
             switch ($segments[2] ?? '') {
-                case 'seg_tienda':
+                case 'segGim':
                     switch ($segments[3] ?? '') {
                         case 'list':
-                            require ROOT_VIEW . '/web/seg_tienda/list.php';
+                            require ROOT_VIEW . '/web/segGim/list.php';
                             break;
                         case 'create':
-                            require ROOT_VIEW . '/web/seg_tienda/create.php';
+                            require ROOT_VIEW . '/web/segGim/create.php';
                             break;
                         case 'edit':
                             if (isset($segments[4])) {
-                                $_GET['codigo_ropa'] = $segments[4];
-                                require ROOT_VIEW . '/web/seg_tienda/edit.php';
+                                $_GET['codigo_clase'] = $segments[4];
+                                require ROOT_VIEW . '/web/segGim/edit.php';
                             } else {
                                 error404();
                             }
                             break;
                         case 'delete':
                             if (isset($segments[4])) {
-                                $_GET['codigo_ropa'] = $segments[4];
-                                require ROOT_VIEW . '/web/seg_tienda/delete.php';
+                                $_GET['codigo_clase'] = $segments[4];
+                                require ROOT_VIEW . '/web/segGim/delete.php';
                             } else {
                                 error404();
                             }
                             break;
                         case 'view':
                             if (isset($segments[4])) {
-                                $_GET['codigo_ropa'] = $segments[4];
-                                require ROOT_VIEW . '/web/seg_tienda/view.php';
+                                $_GET['codigo_clase'] = $segments[4];
+                                require ROOT_VIEW . '/web/segGim/view.php';
                             } else {
                                 error404();
                             }

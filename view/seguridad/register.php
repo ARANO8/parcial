@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = [
             'ope' => $ope,
             'email' => $p_correo_electronico,
-            'full_name' =>  $p_nombre,
+            'fullname' =>  $p_nombre,
             'password' => $p_contrasena,
         ];
         $context = stream_context_create([
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class="register-page" style="min-height: 570.8px;">
     <div class="register-box">
         <div class="register-logo">
-            <a href=""><b>Tienda de Ropa Productos</b></a>
+            <a href=""><b>Clases de Gimnasio</b></a>
         </div>
         <div class="card">
             <div class="card-body register-card-body">

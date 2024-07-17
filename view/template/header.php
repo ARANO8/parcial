@@ -190,7 +190,7 @@
             <img src="<?php echo URL_RESOURCES; ?>adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?php echo $_SESSION['login']['nombre']; ?></a>
+            <a href="#" class="d-block"><?php echo $_SESSION['login']['fullname']; ?></a>
           </div>
         </div>
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -233,9 +233,9 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="<?php echo HTTP_BASE; ?>/web/seg_tienda/list" class="nav-link active">
+                  <a href="<?php echo HTTP_BASE; ?>/web/segGim/list" class="nav-link active">
                     <i class="fas fa-graduation-cap nav-icon"></i>
-                    <p>Registro de Productos</p>
+                    <p>Clases de Gimnasio</p>
                   </a>
                 </li>
               </ul>

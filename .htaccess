@@ -2,7 +2,7 @@ RewriteEngine On
 Options -Indexes
 
 # Establecer la base del directorio para las reescrituras
-RewriteBase /parcial/
+RewriteBase /parcialfinal/
 
 # Redireccionar todas las solicitudes a index.php excepto para archivos y directorios reales
 RewriteCond %{REQUEST_FILENAME} !-f

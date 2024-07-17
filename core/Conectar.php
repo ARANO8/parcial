@@ -8,7 +8,7 @@ class Conectar
     private $port = "3306";
     private $user = "root";
     private $pass = "";
-    private $database ="parcial";
+    private $database ="exfinal";
     private $charset = "utf8mb4";
 
     public function __construct()

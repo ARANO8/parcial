@@ -7,7 +7,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 session_start();
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/parcial/config/global.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/parcialfinal/config/global.php");
 
 require_once(ROOT_DIR . "/model/LoginModel.php");
 
@@ -57,11 +57,11 @@ function  login($input)
 function register($input)
 {
     $p_email = !empty($input['email']) ? $input['email'] : $_POST['email'];
-    $p_full_name = !empty($input['full_name']) ? $input['full_name'] : $_POST['full_name'];
+    $p_fullname = !empty($input['fullname']) ? $input['fullname'] : $_POST['fullname'];
     $p_password = !empty($input['password']) ? $input['password'] : $_POST['password'];
     $p_password = hash('sha512', md5($p_password));
     $tseg_login = new LoginModel();
-    $var = $tseg_login->register($p_email, $p_full_name, $p_password);
+    $var = $tseg_login->register($p_email, $p_fullname, $p_password);
 
     echo json_encode($var);
 }

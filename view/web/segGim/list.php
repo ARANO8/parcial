@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $page = isset($_POST['page']) ? $_POST['page'] : 1;
     $filter = urlencode(trim(isset($_POST['filter']) ? $_POST['filter'] : ''));
 }
-$url = HTTP_BASE . "/controller/Seg_tiendaController.php?ope=" . $ope . "&page=" . $page . "&filter=" . $filter;
+$url = HTTP_BASE . "/controller/Seg_gimnasioController.php?ope=" . $ope . "&page=" . $page . "&filter=" . $filter;
 $filter = urldecode($filter);
 $response = file_get_contents($url);
 $responseData = json_decode($response, true);
@@ -49,7 +49,7 @@ if ($end_page > $total_pages) {
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Administración</a></li>
-                                <li class="breadcrumb-item active">Productos</li>
+                                <li class="breadcrumb-item active">Clases</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -57,7 +57,7 @@ if ($end_page > $total_pages) {
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h1 class="m-0">Adminsitración de Productos </h1>
+                            <h1 class="m-0">Adminsitración de Clases Gimnasio </h1>
                         </div>
                         <div class="card-header">
                             <form action="" method="POST">
@@ -73,8 +73,8 @@ if ($end_page > $total_pages) {
                         </div>
                         <div class="card-body">
                             <div class="bd-example">
-                <a href="<?php echo HTTP_BASE."/web/seg_tienda/create" ?>" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>Nuevo</a>
-                <a href="<?php echo HTTP_BASE."/report/rpt_pdf_tienda.php" ?>" class="btn btn-primary btn-sm" target="_blank"><i class="fas fa-file-pdf"></i>Reporte</a>
+                <a href="<?php echo HTTP_BASE."/web/segGim/create" ?>" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>Nuevo</a>
+                <a href="<?php echo HTTP_BASE."/report/rpt_pdf_Gim.php" ?>" class="btn btn-primary btn-sm" target="_blank"><i class="fas fa-file-pdf"></i>Reporte</a>
                             </div>
                         </div>
 
@@ -93,32 +93,46 @@ if ($end_page > $total_pages) {
                                     <thead>
                                         <tr>
                                             <th>Opciones</th>
-                                            <th>Codigo Ropa</th>
-                                            <th>Tipo</th>
-                                            <th>Talla</th>
-                                            <th>Precio</th>
-                                            <th>Stock</th>
-                                            <th>Marca</th>
-                                            <th>Proveedor</th>
-                                            <th>Color</th>
+                                            <th>Codigo Clase</th>
+                                            <th>nombre_clase</th>
+                                            <th>descripcion</th>
+                                            <th>duracion</th>
+                                            <th>instructor</th>
+                                            <th>dias_semana</th>
+                                            <th>horario</th>
+                                            <th>ubicacion</th>
+                                            <th>nivel</th>
+                                            <th>equipamiento</th>
+                                            <th>cupo</th>
+                                            <th>frecuencia</th>
+                                            <th>intensidad</th>
+                                            <th>tipo_clase</th>
+                                            <th>observaciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($records as  $row) : ?>
                                             <tr>
                                                 <td>
-                                                    <a href="<?php echo HTTP_BASE . "/web/seg_tienda/view/" . $row['codigo_ropa']; ?>" class="btn btn-warning btn-sm">Ver</a>
-                                                    <a href="<?php echo HTTP_BASE . "/web/seg_tienda/edit/" . $row['codigo_ropa']; ?>" class="btn btn-primary btn-sm">Editar</a>
-                                                    <a href="<?php echo HTTP_BASE . "/web/seg_tienda/delete/" . $row['codigo_ropa']; ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                                                    <a href="<?php echo HTTP_BASE . "/web/segGim/view/" . $row['codigo_clase']; ?>" class="btn btn-warning btn-sm">Ver</a>
+                                                    <a href="<?php echo HTTP_BASE . "/web/segGim/edit/" . $row['codigo_clase']; ?>" class="btn btn-primary btn-sm">Editar</a>
+                                                    <a href="<?php echo HTTP_BASE . "/web/segGim/delete/" . $row['codigo_clase']; ?>" class="btn btn-danger btn-sm">Eliminar</a>
                                                 </td>
-                                                <td><?php echo htmlspecialchars($row['codigo_ropa']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['tipo']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['talla']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['precio']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['stock']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['marca']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['proveedor']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['color']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['codigo_clase']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['nombre_clase']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['duracion']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['instructor']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['dias_semana']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['horario']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['ubicacion']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['nivel']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['equipamiento']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['cupo']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['frecuencia']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['intensidad']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['tipo_clase']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['observaciones']); ?></td>
 
                                             </tr>
                                         <?php endforeach; ?>

@@ -22,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = json_decode($response, true);
         if ($result["ESTADO"] && isset($result['DATA']) &&  !empty($result['DATA'])  ) {
             $_SESSION['login'] = $result['DATA'][0];
-            if(isset($_SESSION['login']['full_name']))
+            if(isset($_SESSION['login']['fullname']))
             {
                 echo "<script>alert('Acceso Autorizado');</script>";
-                echo '<script>window.location.href ="'.HTTP_BASE.'/web/seg_tienda/list";</script>';
+                echo '<script>window.location.href ="'.HTTP_BASE.'/web/segGim/list";</script>';
             }
             else{
                 echo "<script>alert('Acceso No Autorizado');</script>";
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a class="h1"><b>Sistema Tienda de Ropa</b</a>
+                <a class="h1"><b>Sistema Clases de Gimnasio</b</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Iniciar Session</p>
